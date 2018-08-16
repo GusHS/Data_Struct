@@ -77,8 +77,6 @@ public class Arrays8{
         }else{
             output+="Data was not found";
         }
-
-        
         JOptionPane.showMessageDialog(null, output);
     }
 
@@ -99,6 +97,7 @@ public class Arrays8{
         }
         JOptionPane.showMessageDialog(null, output);
     }
+    
 
     public void principal(){
         displayDataString(names);
@@ -108,4 +107,5 @@ public class Arrays8{
         Arrays8 object = new Arrays8(args);
         object.principal();
     }
+
 }
