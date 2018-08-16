@@ -1,10 +1,11 @@
 import javax.swing.JOptionPane;
+import java.util.Arrays;
 
-public class Arrays5{
+public class Arrays6{
     private int numbers1[];
     private int numbers2[];
 
-    public Arrays5(){
+    public Arrays6(){
         numbers1 = new int[3];
         numbers2 = new int [3];
     }
@@ -14,10 +15,24 @@ public class Arrays5{
         }
     }
     private void inverseCopy(int nums1[], int nums2[]) {
-        int pos;
+        int pos = nums1.length-1;
         for (int i = 0; i < nums1.length; i++) {
-            pos = nums1.length-i;
-            nums[i] = nums1[pos];
+            nums2[i] = nums1[pos];
+            pos--;
+        }
+    }
+    
+    private void sort(int nums[]) {
+        for (int i = 0 ; i<nums.length-1; i++) {
+            int min = i;
+            for (int j=i+1 ; j < nums.length; j++) {
+                if (nums[j] < nums[min]) min = j;
+            }
+            if (i != min) {
+                int temp = nums[i];
+                nums[i] = nums[min];
+                nums[min] = temp;
+            }
         }
     }
 
@@ -41,12 +56,12 @@ public class Arrays5{
         displayData(numbers1);
         inverseCopy(numbers1,numbers2);
         displayData(numbers2);
+        sort(numbers2);
+        displayData(numbers2);
     }
 
     public static void main(String[] args) {
-        Arrays5 object = new Arrays5();
+        Arrays6 object = new Arrays6();
         object.principal();
     }
-
-
 }
