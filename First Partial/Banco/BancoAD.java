@@ -38,8 +38,8 @@ public class BancoAD{
             }
             //3. Cerrar el archivo
             archivoIn.close();
-        } catch (Exception e) {
-            //TODO: handle exception
+        } catch (Exception ioe) {
+            System.out.println("Error"+ioe);
         }
         //4.Entregar los datos.
         return datos;
@@ -58,8 +58,8 @@ public class BancoAD{
             }
             //3. Cerrar el archivo
             archivoIn.close();
-        } catch (Exception e) {
-            //TODO: handle exception
+        } catch (Exception ioe) {
+            System.out.println("Error"+ioe);
         }
         System.out.println("HIT OUT");
     }
