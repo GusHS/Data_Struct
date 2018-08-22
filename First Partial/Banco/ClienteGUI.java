@@ -178,8 +178,7 @@ public class ClienteGUI extends JFrame implements ActionListener
         if(e.getSource() == bConsultar)
         {
             //1. Realizar consulta de clientes
-            datos = bancoad.consultarClientes();
-            
+            datos = bancoad.consultarClientes(); 
             // 2. Desplegar datos
             taDatos.setText(datos);
         }
@@ -188,14 +187,13 @@ public class ClienteGUI extends JFrame implements ActionListener
         {
             // 1. Obtener le No de Cuenta de tfNocta
             String ncta = tfNocta.getText();
-            
+            System.out.println(ncta);
             // 2. Realizar transaccion de consultar no. de cuenta
-            respuesta = bancoad.consultar(ncta);
+            respuesta = bancoad.consultarNcta(ncta);
             if(respuesta.equals("NO_LOCALIZADO"))
               respuesta = "No. de Cuenta no localizado: "+ncta;
             else
                 inactivarBotones();
-            
             // 3. Desplegar resultado de la transaccion
             taDatos.setText(respuesta);
         }
@@ -206,13 +204,13 @@ public class ClienteGUI extends JFrame implements ActionListener
             String ncta = tfNocta.getText();
             
             // 2. Obtener la cantidad a retirar
-            //int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Cantidad a retirar ="));
+            int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Cantidad a retirar ="));
             
             // 3. Realizar transaccion deposito
-            //respuesta = bancoad.retirar(ncta,cantidad);
-            
+            respuesta = bancoad.retirar(ncta,cantidad);
+            bancoad.arregloArchivo();
             // 4. Desplegar resultado de la transaccion
-            //taDatos.setText(respuesta);
+            taDatos.setText(respuesta);
 
             
             activarBotones();
@@ -224,13 +222,13 @@ public class ClienteGUI extends JFrame implements ActionListener
             String ncta = tfNocta.getText();
             
             // 2. Obtener la cantidad a depositar
-            //int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Cantidad a depositar ="));
+            int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Cantidad a depositar ="));
             
             // 3. Realizar transaccion deposito
-            //respuesta = bancoad.depositar(ncta,cantidad);
-            
+            respuesta = bancoad.depositar(ncta,cantidad);
+            bancoad.arregloArchivo();
             // 4. Desplegar resultado de la transaccion
-            //taDatos.setText(respuesta);
+            taDatos.setText(respuesta);
             
             activarBotones();
         }
@@ -242,7 +240,6 @@ public class ClienteGUI extends JFrame implements ActionListener
 
         if(e.getSource() == bDatosArchivoArreglo)
         {
-            System.out.println("HIT");
             datos = bancoad.datosArchivoArreglo();
             taDatos.setText(datos);
         }
@@ -255,6 +252,7 @@ public class ClienteGUI extends JFrame implements ActionListener
         
         if(e.getSource() == bDatosArregloArchivo)
         {
+            bancoad.arregloArchivo();
             taDatos.setText("Pasar Datos del Arreglo al Archivo ...");
         }
         
