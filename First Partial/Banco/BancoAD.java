@@ -1,4 +1,6 @@
 import java.io.*;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.StringTokenizer;
 
 public class BancoAD{
@@ -124,6 +126,9 @@ public class BancoAD{
     public String depositar(String ncta, int cantidad){
         consultarNcta(ncta);
         int saldoActual;
+        String fecha="";
+        String datos="";
+        String regDepos="";
         String updatedValue="";
         String tempArray[] = arrayClientes[posicion].split("_");
         saldoActual =Integer.parseInt(tempArray[SALCUENTA_POS]);
@@ -137,16 +142,32 @@ public class BancoAD{
         int i = 0;
         for (i=0; i < tempArray.length-1; i++) {
             updatedValue+=tempArray[i]+"_";
+            regDepos+=tempArray[i]+"_";
         }
         updatedValue+=tempArray[i];
         System.out.println("Updated Value: "+updatedValue);
         arrayClientes[posicion] = updatedValue;
-        String datos = "Valores Actualizados";
+        datos = "Valores Actualizados";
+        //Write Depositos.txt
+        Calendar calendar = Calendar.getInstance();
+        fecha = Integer.toString(calendar.get(Calendar.DAY_OF_MONTH))+"/"+Integer.toString(calendar.get(Calendar.MONTH))+"/"+Integer.toString(calendar.get(Calendar.YEAR))+" "+Integer.toString(calendar.get(Calendar.HOUR))+":"+Integer.toString(calendar.get(Calendar.MINUTE))+":"+Integer.toString(calendar.get(Calendar.SECOND));
+        System.out.println("Date: "+ fecha);
+        regDepos+=Integer.toString(cantidad)+"_"+fecha+"\n";
+        try {
+            archivoOut = new PrintWriter(new FileWriter("Depositos.txt"));
+            archivoOut.append(regDepos);
+            archivoOut.close();
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
         return datos;
     }
     public String retirar(String ncta, int cantidad){
+        // Update Clientes.txt
         consultarNcta(ncta);
         int saldoActual;
+        String fecha="";
+        String regRetiro="";
         String updatedValue="";
         String tempArray[] = arrayClientes[posicion].split("_");
         saldoActual =Integer.parseInt(tempArray[SALCUENTA_POS]);
@@ -160,11 +181,26 @@ public class BancoAD{
         int i = 0;
         for (i=0; i < tempArray.length-1; i++) {
             updatedValue+=tempArray[i]+"_";
+            regRetiro+=tempArray[i]+"_";
         }
         updatedValue+=tempArray[i];
         System.out.println("Updated Value: "+updatedValue);
         arrayClientes[posicion] = updatedValue;
         String datos = "Valores Actualizados";
+
+        // Write Retiros.txt
+        Calendar calendar = Calendar.getInstance();
+        fecha = Integer.toString(calendar.get(Calendar.DAY_OF_MONTH))+"/"+Integer.toString(calendar.get(Calendar.MONTH))+"/"+Integer.toString(calendar.get(Calendar.YEAR))+" "+Integer.toString(calendar.get(Calendar.HOUR))+":"+Integer.toString(calendar.get(Calendar.MINUTE))+":"+Integer.toString(calendar.get(Calendar.SECOND));
+        System.out.println("Date: "+ fecha);
+        regRetiro+=Integer.toString(cantidad)+"_"+fecha+"\n";
+        try {
+            archivoOut = new PrintWriter(new FileWriter("Retiros.txt"));
+            archivoOut.append(regRetiro);
+            archivoOut.close();
+
+        } catch (Exception e) {
+            System.out.println("Error: "+e);
+        }
         return datos;
     }
 
