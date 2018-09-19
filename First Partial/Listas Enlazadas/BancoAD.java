@@ -298,6 +298,7 @@ public class BancoAD{
         try {
             archivoOut = new PrintWriter(new FileWriter("Bajas.txt",true));
             System.out.println(actualCDP.toString());
+            
             archivoOut.println(actualCDP.toString());
             archivoOut.close();
         } catch (Exception e) {
