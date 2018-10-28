@@ -4,12 +4,13 @@ import javax.swing.ImageIcon;
 
 public class ImagesDP {
     private ImageIcon img;
-    private String path;
+    private String path, album;
     private ImagesDP next,prev;
 
     public ImagesDP(String str){
         this.img  = new ImageIcon(((new ImageIcon("img/"+str)).getImage()).getScaledInstance(218, 218, java.awt.Image.SCALE_SMOOTH));
         this.path = "img/"+str;
+        this.album = str;
         this.next = null;
         this.prev = null;
     }
@@ -25,7 +26,11 @@ public class ImagesDP {
     public ImagesDP getPrev(){
         return this.prev;
     }
-    
+    public String getAlbum(){
+        return this.album;
+    }
+
+
     public void setImage(String str){
         this.img = new ImageIcon(((new ImageIcon("img/"+str)).getImage()).getScaledInstance(218, 218, java.awt.Image.SCALE_SMOOTH));
     }
@@ -37,7 +42,8 @@ public class ImagesDP {
         this.prev = node;
     }
     public String toString(){
-        return this.path;
+        return this.album;
     }
+
 
 }
