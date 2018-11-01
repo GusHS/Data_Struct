@@ -1,0 +1,9 @@
+
+class LibroGUI
+{
+
+};
+int main()
+{
+
+};
